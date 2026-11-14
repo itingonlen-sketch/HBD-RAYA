@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Digital — Misi Pencarian Hadiah Ulang Tahun Raya</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cinzel Decorative, Playfair Display, Great Vibes, Lora, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: {
+              light: '#f8eed8',
+              DEFAULT: '#f4e4c1',
+              mid: '#ebd5a7',
+              dark: '#dfc188',
+            },
+            espresso: {
+              DEFAULT: '#3b2314',
+              soft: '#5c3a21',
+              muted: '#7a5235',
+            },
+            antiqueGold: {
+              light: '#e6c25a',
+              DEFAULT: '#b8860b',
+              dark: '#8a6205',
+            },
+            crimsonX: '#a8201a',
+          },
+          fontFamily: {
+            cinzel: ['"Cinzel Decorative"', '"Playfair Display"', 'serif'],
+            playfair: ['"Playfair Display"', 'serif'],
+            script: ['"Great Vibes"', 'cursive'],
+            lora: ['"Lora"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Base Aged Parchment Background & Texture */
+    body {
+      background-color: #2b190e;
+      color: #3b2314;
+      font-family: 'Lora', serif;
+      overflow-x: hidden;
+    }
+
+    .parchment-surface {
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255, 250, 238, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.14) 0%, transparent 50%),
+        linear-gradient(165deg, #f7ebd2 0%, #f1deb7 48%, #e6cfa3 100%);
+      box-shadow:
+        inset 0 0 55px rgba(92, 54, 24, 0.22),
+        0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Subtle Paper Grain Overlay via Inline SVG Pattern */
+    .parchment-grain::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.35'/%3E%3C/svg%3E");
+      z-index: 1;
+    }
+
+    /* Ornate Double Border Card */
+    .ornate-card {
+      background: rgba(252, 245, 229, 0.78);
+      border: 1.5px solid rgba(184, 134, 11, 0.55);
+      box-shadow:
+        0 6px 20px rgba(59, 35, 20, 0.08),
+        inset 0 0 0 3px rgba(244, 228, 193, 0.85),
+        inset 0 0 0 4px rgba(184, 134, 11, 0.25);
+    }
+
+    /* Gold Wax Seal Styling */
+    .wax-seal {
+      background: radial-gradient(circle at 32% 30%, #f3d266 0%, #c8961e 48%, #8c6208 88%, #6d4b04 100%);
+      box-shadow:
+        0 8px 18px rgba(59, 35, 20, 0.35),
+        inset 0 2px 4px rgba(255, 248, 220, 0.65),
+        inset 0 -3px 6px rgba(74, 48, 4, 0.6);
+    }
+
+    /* Cover Gate Transition */
+    #cover-gate {
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+    }
+    #cover-gate.opened {
+      transform: translateY(-105%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-compass {
+      animation: spinSlow 48s linear infinite;
+    }
+
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float {
+      animation: floatGentle 3.6s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.45), 0 8px 20px rgba(59, 35, 20, 0.25); }
+      50% { box-shadow: 0 0 0 10px rgba(184, 134, 11, 0), 0 10px 24px rgba(59, 35, 20, 0.32); }
+    }
+    .btn-gold-pulse {
+      animation: pulseGlow 2.6s infinite;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #2b190e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b8860b;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-antiqueGold/30 selection:text-espresso">
+
+  <!-- Confetti & Sparkle Celebration Canvas -->
+  <canvas id="celebration-canvas" class="fixed inset-0 pointer-events-none z-[100]"></canvas>
+
+  <!-- Toast Notification Banner (No alert() used) -->
+  <div
+    id="toast-banner"
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-[90] max-w-xs sm:max-w-sm w-[90%] bg-espresso text-parchment-light px-4 py-3 rounded-2xl shadow-2xl border border-antiqueGold/60 flex items-center gap-3 transition-all duration-300 opacity-0 -translate-y-6 pointer-events-none"
+    role="status"
+    aria-live="polite"
+  >
+    <span class="text-antiqueGold-light text-lg">✦</span>
+    <p id="toast-message" class="font-sans text-xs sm:text-sm font-medium leading-snug"></p>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. COVER GATE (SAMPUL UNDANGAN DIGITAL - FULL SCREEN)                 -->
+  <!-- ===================================================================== -->
+  <section
+    id="cover-gate"
+    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#24140a]/95 backdrop-blur-sm overflow-y-auto"
+    aria-label="Sampul Undangan"
+  >
+    <div class="relative w-full max-w-md my-auto rounded-3xl parchment-surface parchment-grain border-2 border-antiqueGold/70 px-5 py-7 sm:px-8 sm:py-9 text-center overflow-hidden">
+      <!-- Decorative Corner Flourishes -->
+      <svg class="w-12 h-12 text-antiqueGold/70 absolute top-2.5 left-2.5 pointer-events-none" viewBox="0 0 64 64" fill="none">
+        <path d="M4 36V12C4 7.58172 7.58172 4 12 4H36" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 28V14C10 11.7909 11.7909 10 14 10H28" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <circle cx="14" cy="14" r="2.5" fill="currentColor"/>
+      </svg>
+      <svg class="w-12 h-12 text-antiqueGold/70 absolute top-2.5 right-2.5 rotate-90 pointer-events-none" viewBox="0 0 64 64" fill="none">
+        <path d="M4 36V12C4 7.58172 7.58172 4 12 4H36" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 28V14C10 11.7909 11.7909 10 14 10H28" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <circle cx="14" cy="14" r="2.5" fill="currentColor"/>
+      </svg>
+      <svg class="w-12 h-12 text-antiqueGold/70 absolute bottom-2.5 left-2.5 -rotate-90 pointer-events-none" viewBox="0 0 64 64" fill="none">
+        <path d="M4 36V12C4 7.58172 7.58172 4 12 4H36" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 28V14C10 11.7909 11.7909 10 14 10H28" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <circle cx="14" cy="14" r="2.5" fill="currentColor"/>
+      </svg>
+      <svg class="w-12 h-12 text-antiqueGold/70 absolute bottom-2.5 right-2.5 rotate-180 pointer-events-none" viewBox="0 0 64 64" fill="none">
+        <path d="M4 36V12C4 7.58172 7.58172 4 12 4H36" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 28V14C10 11.7909 11.7909 10 14 10H28" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <circle cx="14" cy="14" r="2.5" fill="currentColor"/>
+      </svg>
+
+      <div class="relative z-10 flex flex-col items-center">
+        <!-- Compass Rose SVG -->
+        <div class="relative w-20 h-20 sm:w-24 sm:h-24 mb-3 flex items-center justify-center">
+          <svg class="w-full h-full text-espresso drop-shadow" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="52" stroke="#8a6205" stroke-width="1.5" stroke-dasharray="3 3" />
+            <circle cx="60" cy="60" r="44" stroke="#3b2314" stroke-width="2" />
+            <circle cx="60" cy="60" r="39" stroke="#b8860b" stroke-width="1" />
+            <!-- Cardinal Letters -->
+            <text x="60" y="13" text-anchor="middle" fill="#a8201a" font-family="Cinzel Decorative, serif" font-size="11" font-weight="bold">N</text>
+            <text x="60" y="114" text-anchor="middle" fill="#3b2314" font-family="Cinzel Decorative, serif" font-size="10" font-weight="bold">S</text>
+            <text x="110" y="64" text-anchor="middle" fill="#3b2314" font-family="Cinzel Decorative, serif" font-size="10" font-weight="bold">E</text>
+            <text x="10" y="64" text-anchor="middle" fill="#3b2314" font-family="Cinzel Decorative, serif" font-size="10" font-weight="bold">W</text>
+            <!-- Compass Star -->
+            <g class="origin-center animate-compass">
+              <polygon points="60,20 67,53 100,60 67,67 60,100 53,67 20,60 53,53" fill="#b8860b" opacity="0.35"/>
+              <polygon points="60,18 66,54 102,60 66,66 60,102 54,66 18,60 54,54" stroke="#3b2314" stroke-width="1.5" fill="none"/>
+              <polygon points="60,18 66,54 60,60" fill="#a8201a"/>
+              <polygon points="60,18 54,54 60,60" fill="#3b2314"/>
+              <polygon points="60,102 66,66 60,60" fill="#3b2314"/>
+              <polygon points="60,102 54,66 60,60" fill="#d4af37"/>
+              <polygon points="102,60 66,54 60,60" fill="#3b2314"/>
+              <polygon points="102,60 66,66 60,60" fill="#d4af37"/>
+              <polygon points="18,60 54,54 60,60" fill="#d4af37"/>
+              <polygon points="18,60 54,66 60,60" fill="#3b2314"/>
+            </g>
+            <circle cx="60" cy="60" r="5" fill="#f8eed8" stroke="#3b2314" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <!-- Top Invitation Caption -->
+        <p class="font-sans text-[11px] sm:text-xs font-bold tracking-[0.28em] uppercase text-espresso-soft mb-1.5">
+          YOU'RE INVITED TO
+        </p>
+
+        <!-- Main Heading -->
+        <h1 class="font-cinzel text-2xl sm:text-3xl font-black text-espresso leading-tight tracking-wide drop-shadow-sm">
+          MISI PENCARIAN HADIAH
+        </h1>
+
+        <!-- Ribbon Banner -->
+        <div class="relative my-3 w-full max-w-xs">
+          <div class="bg-gradient-to-r from-[#c8961e] via-[#e2b842] to-[#c8961e] text-espresso font-playfair font-extrabold text-[11px] sm:text-xs tracking-[0.14em] uppercase py-2 px-4 rounded-xl border border-espresso/40 shadow-md">
+            HARTA KARUN ULANG TAHUN RAYA
+          </div>
+        </div>
+
+        <!-- Romantic Script Subtitle -->
+        <p class="font-script text-3xl sm:text-4xl text-espresso-soft my-1">
+          Celebrating Raya's Birthday
+        </p>
+
+        <!-- Divider with Crimson X -->
+        <div class="flex items-center justify-center gap-3 w-48 my-2.5">
+          <span class="h-px flex-1 bg-espresso/30"></span>
+          <span class="text-crimsonX font-bold text-xs tracking-widest">✦ ✕ ✦</span>
+          <span class="h-px flex-1 bg-espresso/30"></span>
+        </div>
+
+        <!-- Recipient Card ("Kepada Yth. / Spesial Untuk: Raya") -->
+        <div class="w-full max-w-xs ornate-card rounded-2xl px-5 py-4 my-2.5 relative">
+          <p class="font-sans text-[11px] uppercase tracking-[0.2em] text-espresso-muted font-semibold">
+            Kepada Yth.
+          </p>
+          <p class="font-lora italic text-xs text-espresso-soft mt-0.5">
+            Spesial Untuk:
+          </p>
+          <p class="font-playfair text-2xl sm:text-3xl font-extrabold text-espresso mt-1 tracking-wide">
+            Raya <span class="text-crimsonX text-xl align-middle">♥</span>
+          </p>
+        </div>
+
+        <!-- Gold Wax-Seal Emblem + Open Invitation Button -->
+        <div class="mt-4 flex flex-col items-center gap-3 w-full">
+          <button
+            id="open-invitation-btn"
+            type="button"
+            class="btn-gold-pulse group relative inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-full bg-gradient-to-b from-[#4e2f1b] to-[#2e1a0d] text-parchment-light font-sans font-semibold text-sm tracking-wide border-2 border-antiqueGold-light shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer"
+          >
+            <!-- Mini Gold Wax Seal Badge -->
+            <span class="wax-seal w-7 h-7 rounded-full flex items-center justify-center text-espresso font-cinzel font-black text-xs border border-parchment-light/50 group-hover:rotate-12 transition-transform">
+              R
+            </span>
+            <span>Buka Undangan</span>
+            <svg class="w-4 h-4 text-antiqueGold-light group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </button>
+          <p class="font-sans text-[11px] text-espresso-muted">
+            Ketuk tombol di atas untuk membuka peta &amp; misi
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- FLOATING AUDIO CONTROL & QUICK SHARE BUTTONS                          -->
+  <!-- ===================================================================== -->
+  <div id="floating-controls" class="fixed bottom-4 right-4 z-40 flex flex-col gap-2.5 opacity-0 pointer-events-none transition-opacity duration-500">
+    <!-- Copy / Share Link Button -->
+    <button
+      id="share-link-btn"
+      type="button"
+      title="Salin Link Undangan"
+      aria-label="Salin Link Undangan"
+      class="w-11 h-11 rounded-full bg-espresso/90 text-parchment-light border border-antiqueGold shadow-lg flex items-center justify-center hover:bg-espresso active:scale-95 transition cursor-pointer"
+    >
+      <svg class="w-5 h-5 text-antiqueGold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+      </svg>
+    </button>
+
+    <!-- Music Mute/Unmute Button -->
+    <button
+      id="music-toggle-btn"
+      type="button"
+      title="Putar / Hentikan Musik"
+      aria-label="Putar atau Hentikan Musik Latar"
+      class="w-11 h-11 rounded-full bg-espresso/90 text-parchment-light border border-antiqueGold shadow-lg flex items-center justify-center hover:bg-espresso active:scale-95 transition cursor-pointer relative"
+    >
+      <!-- Icon Sound On -->
+      <svg id="icon-sound-on" class="w-5 h-5 text-antiqueGold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+      </svg>
+      <!-- Icon Sound Off (Hidden by default) -->
+      <svg id="icon-sound-off" class="w-5 h-5 text-parchment-light/60 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN INVITATION SCROLL CONTAINER (MOBILE-FIRST DIGITAL INVITATION)    -->
+  <!-- ===================================================================== -->
+  <main class="min-h-screen w-full py-0 sm:py-8 px-0 sm:px-4 flex justify-center">
+    <div class="relative w-full max-w-xl parchment-surface parchment-grain sm:rounded-[2rem] border-x-0 sm:border-2 border-antiqueGold/60 overflow-hidden">
+
+      <!-- ================================================================= -->
+      <!-- 2. HERO & LIVE COUNTDOWN (HITUNG MUNDUR ACARA)                    -->
+      <!-- ================================================================= -->
+      <header class="relative z-10 px-5 pt-10 pb-8 sm:px-9 sm:pt-12 text-center border-b border-antiqueGold/35">
+        <!-- Decorative Top Scroll Banner -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-espresso/10 border border-antiqueGold/40 mb-4">
+          <span class="text-crimsonX text-xs">✦</span>
+          <span class="font-sans text-[11px] font-bold tracking-[0.22em] uppercase text-espresso-soft">
+            Undangan Spesial
+          </span>
+          <span class="text-crimsonX text-xs">✦</span>
+        </div>
+
+        <h2 class="font-cinzel text-2xl sm:text-4xl font-black text-espresso leading-tight tracking-wide">
+          MISI PENCARIAN HADIAH
+        </h2>
+
+        <div class="my-3 inline-block bg-gradient-to-r from-[#c8961e] via-[#e2b842] to-[#c8961e] text-espresso font-playfair font-extrabold text-xs sm:text-sm tracking-[0.14em] uppercase py-2 px-5 rounded-xl border border-espresso/40 shadow-sm">
+          HARTA KARUN ULANG TAHUN RAYA
+        </div>
+
+        <p class="font-script text-3xl sm:text-4xl text-espresso-soft mt-1">
+          Celebrating Raya's Birthday
+        </p>
+
+        <!-- Date & Time Card -->
+        <div class="mt-6 ornate-card rounded-2xl p-4 sm:p-5 text-left sm:text-center">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 items-center">
+            <!-- Date -->
+            <div class="flex sm:flex-col items-center gap-3 sm:gap-1.5 sm:border-r sm:border-antiqueGold/30 sm:pr-3">
+              <div class="w-10 h-10 rounded-xl bg-espresso text-antiqueGold-light flex items-center justify-center shrink-0 shadow">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div>
+                <p class="font-sans text-[10px] uppercase tracking-widest text-espresso-muted font-semibold">Hari &amp; Tanggal</p>
+                <p class="font-playfair font-bold text-sm sm:text-base text-espresso">Minggu, 15 November 2026</p>
+              </div>
+            </div>
+
+            <!-- Time -->
+            <div class="flex sm:flex-col items-center gap-3 sm:gap-1.5">
+              <div class="w-10 h-10 rounded-xl bg-espresso text-antiqueGold-light flex items-center justify-center shrink-0 shadow">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div>
+                <p class="font-sans text-[10px] uppercase tracking-widest text-espresso-muted font-semibold">Waktu Petualangan</p>
+                <p class="font-playfair font-bold text-sm sm:text-base text-espresso">Pukul 15.00 WIB - Selesai</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Countdown Timer -->
+        <div class="mt-6">
+          <p class="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-espresso-soft mb-3">
+            Hitung Mundur Menuju Keberangkatan
+          </p>
+
+          <div id="countdown-grid" class="grid grid-cols-4 gap-2.5 sm:gap-3.5 max-w-md mx-auto">
+            <div class="ornate-card rounded-2xl py-3 px-2 flex flex-col items-center">
+              <span id="cd-days" class="font-cinzel text-xl sm:text-2xl font-black text-espresso">00</span>
+              <span class="font-sans text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-espresso-muted mt-0.5">Hari</span>
+            </div>
+            <div class="ornate-card rounded-2xl py-3 px-2 flex flex-col items-center">
+              <span id="cd-hours" class="font-cinzel text-xl sm:text-2xl font-black text-espresso">00</span>
+              <span class="font-sans text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-espresso-muted mt-0.5">Jam</span>
+            </div>
+            <div class="ornate-card rounded-2xl py-3 px-2 flex flex-col items-center">
+              <span id="cd-minutes" class="font-cinzel text-xl sm:text-2xl font-black text-espresso">00</span>
+              <span class="font-sans text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-espresso-muted mt-0.5">Menit</span>
+            </div>
+            <div class="ornate-card rounded-2xl py-3 px-2 flex flex-col items-center">
+              <span id="cd-seconds" class="font-cinzel text-xl sm:text-2xl font-black text-crimsonX">00</span>
+              <span class="font-sans text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-espresso-muted mt-0.5">Detik</span>
+            </div>
+          </div>
+
+          <div id="countdown-started-banner" class="hidden mt-3 ornate-card rounded-2xl py-3 px-4 bg-antiqueGold/15 border-antiqueGold">
+            <p class="font-playfair font-bold text-sm sm:text-base text-espresso">
+              🎉 Petualangan Telah Dimulai! Selamat Ulang Tahun Raya!
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- ================================================================= -->
+      <!-- 3. KARTU UNDANGAN & PETA HARTA KARUN (PHOTO SHOWCASE + LIGHTBOX)  -->
+      <!-- ================================================================= -->
+      <section class="relative z-10 px-5 py-8 sm:px-9 border-b border-antiqueGold/35" aria-labelledby="gallery-heading">
+        <div class="text-center mb-5">
+          <span class="font-sans text-[11px] font-bold tracking-[0.22em] uppercase text-antiqueGold-dark">
+            Gulungan Dokumen Rahasia
+          </span>
+          <h3 id="gallery-heading" class="font-playfair text-xl sm:text-2xl font-extrabold text-espresso mt-1">
+            Poster Undangan &amp; Peta Harta Karun
+          </h3>
+          <p class="font-lora text-xs sm:text-sm text-espresso-soft mt-1">
+            Ketuk gambar untuk memperbesar dan melihat detail rute misi
+          </p>
+        </div>
+
+        <!-- Filter Tabs (Semua / Poster Undangan / Peta Misi) -->
+        <div class="flex items-center justify-center gap-2 mb-5" role="tablist" aria-label="Filter Dokumen">
+          <button
+            type="button"
+            data-tab="all"
+            class="doc-tab active px-3.5 py-2 rounded-full font-sans text-xs font-semibold transition cursor-pointer bg-espresso text-parchment-light shadow"
+          >
+            Semua (2)
+          </button>
+          <button
+            type="button"
+            data-tab="poster"
+            class="doc-tab px-3.5 py-2 rounded-full font-sans text-xs font-semibold transition cursor-pointer bg-espresso/10 text-espresso hover:bg-espresso/20"
+          >
+            Poster Undangan
+          </button>
+          <button
+            type="button"
+            data-tab="map"
+            class="doc-tab px-3.5 py-2 rounded-full font-sans text-xs font-semibold transition cursor-pointer bg-espresso/10 text-espresso hover:bg-espresso/20"
+          >
+            Peta Harta Karun
+          </button>
+        </div>
+
+        <!-- Photo Cards Container -->
+        <div class="space-y-6">
+          <!-- CARD 1: Poster Undangan (Gemini_Generated_Image_84xzzc84xzzc84xz.jpg) -->
+          <article id="card-poster" class="doc-card ornate-card rounded-2xl p-3.5 sm:p-4 transition-all">
+            <div class="flex items-center justify-between mb-2.5 px-1">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-espresso text-antiqueGold-light font-cinzel text-xs font-bold flex items-center justify-center">I</span>
+                <h4 class="font-playfair font-bold text-sm sm:text-base text-espresso">Poster Undangan</h4>
+              </div>
+              <button
+                type="button"
+                onclick="openLightbox(0)"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-espresso/10 hover:bg-espresso/20 text-espresso font-sans text-xs font-semibold transition cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                </svg>
+                <span>Perbesar</span>
+              </button>
+            </div>
+
+            <div
+              onclick="openLightbox(0)"
+              role="button"
+              tabindex="0"
+              aria-label="Buka Poster Undangan dalam layar penuh"
+              onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(0)"
+              class="group relative rounded-xl overflow-hidden border-2 border-antiqueGold/60 bg-[#e6cfa3] shadow-md cursor-zoom-in"
+            >
+              <img
+                id="img-poster"
+                src="https://lh3.googleusercontent.com/gg-dl/AHiVA1njk9pUUIn8R0XwEPZaDWtpia7MHMl12DNROfwL3mYK8vcKHEfxiyzXeqcv4CrZnb_OfCpcSDPz0PEa63ohVir2Hi23tehlVydGYCiTfhB1xYjpbaUPZ7S5x9uK6LkXr5ejqT4IeoPO37MF8Om5FIA4btSOWeYp4Z7TN2ZsMNqI7B2NUw"
+                alt="Poster Undangan Misi Pencarian Hadiah - Harta Karun Ulang Tahun Raya"
+                onerror="this.onerror=null;this.src='https://placehold.co/800x1200/f4e4c1/3b2314?text=Poster+Undangan+Raya';"
+                class="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/85 via-espresso/40 to-transparent p-3 flex items-center justify-between text-parchment-light">
+                <span class="font-sans text-xs font-medium">Ketuk untuk melihat layar penuh</span>
+                <span class="px-2.5 py-1 rounded-full bg-antiqueGold text-espresso font-sans text-[11px] font-bold">HD Zoom</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 2: Peta Misi Harta Karun (WhatsApp Image 2026-11-14 at 22.21.14.jpeg) -->
+          <article id="card-map" class="doc-card ornate-card rounded-2xl p-3.5 sm:p-4 transition-all">
+            <div class="flex items-center justify-between mb-2.5 px-1">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-espresso text-antiqueGold-light font-cinzel text-xs font-bold flex items-center justify-center">II</span>
+                <h4 class="font-playfair font-bold text-sm sm:text-base text-espresso">Peta Misi Harta Karun</h4>
+              </div>
+              <button
+                type="button"
+                onclick="openLightbox(1)"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-espresso/10 hover:bg-espresso/20 text-espresso font-sans text-xs font-semibold transition cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                </svg>
+                <span>Perbesar</span>
+              </button>
+            </div>
+
+            <div
+              onclick="openLightbox(1)"
+              role="button"
+              tabindex="0"
+              aria-label="Buka Peta Misi Harta Karun dalam layar penuh"
+              onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox(1)"
+              class="group relative rounded-xl overflow-hidden border-2 border-antiqueGold/60 bg-[#e6cfa3] shadow-md cursor-zoom-in"
+            >
+              <img
+                id="img-map"
+                src="https://lh3.googleusercontent.com/gg-dl/AHiVA1lxAIPos8rlW97VtSE4POhSFSu2pYawnsqV0NmcNqrZKgVRCdHqiRNFBjsBtuliEPOiDKGzPYO43yV6tOFAx-e-YGbFMYwlq7oRF_rmO4_5kpz9DIcsD78dDhq9jvBMQ0XYUk2zbm2H2_lxYoQsMtMMtNQRnhrwcce8zKU_iDjiqlOl5w"
+                alt="Peta Misi Pencarian Hadiah Harta Karun Ulang Tahun Raya"
+                onerror="this.onerror=null;this.src='https://placehold.co/1200x700/f4e4c1/3b2314?text=Peta+Misi+Harta+Karun+Raya';"
+                class="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/85 via-espresso/40 to-transparent p-3 flex items-center justify-between text-parchment-light">
+                <span class="font-sans text-xs font-medium">Ketuk untuk melihat rute &amp; pos harta karun</span>
+                <span class="px-2.5 py-1 rounded-full bg-antiqueGold text-espresso font-sans text-[11px] font-bold">HD Zoom</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 4. RANGKAIAN ITINERARY & CHECKPOINT MISI (TREASURE TRAIL)         -->
+      <!-- ================================================================= -->
+      <section class="relative z-10 px-5 py-8 sm:px-9 border-b border-antiqueGold/35" aria-labelledby="itinerary-heading">
+        <div class="text-center mb-5">
+          <span class="font-sans text-[11px] font-bold tracking-[0.22em] uppercase text-antiqueGold-dark">
+            Jejak Petualangan
+          </span>
+          <h3 id="itinerary-heading" class="font-playfair text-xl sm:text-2xl font-extrabold text-espresso mt-1">
+            Rangkaian Itinerary &amp; Checkpoint Misi
+          </h3>
+          <p class="font-lora text-xs sm:text-sm text-espresso-soft mt-1">
+            Centang setiap pos yang sudah berhasil ditaklukkan!
+          </p>
+        </div>
+
+        <!-- Mission Progress Bar -->
+        <div class="ornate-card rounded-2xl p-3.5 mb-6">
+          <div class="flex items-center justify-between text-xs font-sans font-bold text-espresso mb-2">
+            <span>Progres Misi Harta Karun</span>
+            <span id="mission-progress-text" class="text-antiqueGold-dark">0 / 4 Pos Selesai</span>
+          </div>
+          <div class="w-full h-2.5 bg-espresso/15 rounded-full overflow-hidden">
+            <div
+              id="mission-progress-bar"
+              class="h-full bg-gradient-to-r from-antiqueGold-dark via-antiqueGold to-crimsonX rounded-full transition-all duration-500"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Vertical Treasure Trail Timeline -->
+        <div class="relative pl-8 sm:pl-10 space-y-5">
+          <!-- Dashed Trail Line -->
+          <div class="absolute left-3.5 sm:left-4 top-3 bottom-3 w-0.5 border-l-2 border-dashed border-espresso/45 pointer-events-none"></div>
+
+          <!-- STOP 0: Start - Rumah Raya (Cirendeu) -->
+          <div class="relative mission-item" data-step="0">
+            <!-- Trail Marker -->
+            <button
+              type="button"
+              onclick="toggleMissionStep(0)"
+              aria-label="Tandai Start Rumah Raya selesai"
+              class="step-marker absolute -left-8 sm:-left-10 top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-espresso text-parchment-light border-2 border-antiqueGold-light flex items-center justify-center font-sans text-xs font-bold shadow cursor-pointer transition-transform active:scale-90"
+            >
+              ⚑
+            </button>
+
+            <div class="ornate-card rounded-2xl p-4 sm:p-5 transition-all">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-espresso text-antiqueGold-light font-sans text-xs font-bold">
+                  🕒 15.00 WIB
+                </span>
+                <button
+                  type="button"
+                  onclick="toggleMissionStep(0)"
+                  class="step-check-btn inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-espresso/30 font-sans text-xs font-semibold text-espresso hover:bg-espresso/10 transition cursor-pointer"
+                >
+                  <span class="step-check-icon">○</span>
+                  <span class="step-check-label">Tandai Selesai</span>
+                </button>
+              </div>
+
+              <h4 class="font-playfair font-extrabold text-base sm:text-lg text-espresso">
+                Start: Rumah Raya (Cirendeu)
+              </h4>
+
+              <div class="mt-2.5 p-3 rounded-xl bg-antiqueGold/15 border border-antiqueGold/40 flex items-start gap-2.5">
+                <span class="text-crimsonX text-base leading-none mt-0.5">♥</span>
+                <div>
+                  <p class="font-sans text-[11px] font-bold uppercase tracking-wider text-espresso-muted">
+                    Catatan Spesial
+                  </p>
+                  <p class="font-lora italic font-semibold text-sm text-espresso">
+                    "Tunggu pacar kamu jemput ya"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STOP 1: Pos 1 - Gandaria City -->
+          <div class="relative mission-item" data-step="1">
+            <button
+              type="button"
+              onclick="toggleMissionStep(1)"
+              aria-label="Tandai Pos 1 Gandaria City selesai"
+              class="step-marker absolute -left-8 sm:-left-10 top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-espresso text-parchment-light border-2 border-antiqueGold-light flex items-center justify-center font-cinzel text-xs font-bold shadow cursor-pointer transition-transform active:scale-90"
+            >
+              1
+            </button>
+
+            <div class="ornate-card rounded-2xl p-4 sm:p-5 transition-all">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-espresso text-antiqueGold-light font-sans text-xs font-bold">
+                  🕒 16.00 WIB
+                </span>
+                <button
+                  type="button"
+                  onclick="toggleMissionStep(1)"
+                  class="step-check-btn inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-espresso/30 font-sans text-xs font-semibold text-espresso hover:bg-espresso/10 transition cursor-pointer"
+                >
+                  <span class="step-check-icon">○</span>
+                  <span class="step-check-label">Tandai Selesai</span>
+                </button>
+              </div>
+
+              <h4 class="font-playfair font-extrabold text-base sm:text-lg text-espresso">
+                Pos 1: Gandaria City
+              </h4>
+              <p class="font-lora text-sm text-espresso-soft mt-1 leading-relaxed">
+                <strong class="text-espresso">Misi:</strong> Hunting <span class="font-semibold text-espresso">Pop Mart</span> (Main Street GF) dan <span class="font-semibold text-espresso">Squishy</span> (Lt. 2 / GF)
+              </p>
+
+              <div class="mt-3.5">
+                <a
+                  href="https://maps.google.com/?q=Gandaria+City+Jakarta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 rounded-xl bg-espresso hover:bg-espresso-soft text-parchment-light font-sans text-xs font-semibold border border-antiqueGold/60 shadow transition"
+                >
+                  <svg class="w-4 h-4 text-antiqueGold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>Buka Google Maps</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- STOP 2: Pos 2 - Blok M Square -->
+          <div class="relative mission-item" data-step="2">
+            <button
+              type="button"
+              onclick="toggleMissionStep(2)"
+              aria-label="Tandai Pos 2 Blok M Square selesai"
+              class="step-marker absolute -left-8 sm:-left-10 top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-espresso text-parchment-light border-2 border-antiqueGold-light flex items-center justify-center font-cinzel text-xs font-bold shadow cursor-pointer transition-transform active:scale-90"
+            >
+              2
+            </button>
+
+            <div class="ornate-card rounded-2xl p-4 sm:p-5 transition-all">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-espresso text-antiqueGold-light font-sans text-xs font-bold">
+                  🕒 17.30 WIB
+                </span>
+                <button
+                  type="button"
+                  onclick="toggleMissionStep(2)"
+                  class="step-check-btn inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-espresso/30 font-sans text-xs font-semibold text-espresso hover:bg-espresso/10 transition cursor-pointer"
+                >
+                  <span class="step-check-icon">○</span>
+                  <span class="step-check-label">Tandai Selesai</span>
+                </button>
+              </div>
+
+              <h4 class="font-playfair font-extrabold text-base sm:text-lg text-espresso">
+                Pos 2: Blok M Square
+              </h4>
+              <p class="font-lora text-sm text-espresso-soft mt-1 leading-relaxed">
+                <strong class="text-espresso">Misi:</strong> <span class="font-semibold text-espresso">Photobooth</span> (LT.GF Melawai 92)
+              </p>
+
+              <div class="mt-3.5">
+                <a
+                  href="https://maps.google.com/?q=Blok+M+Square+Jakarta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 rounded-xl bg-espresso hover:bg-espresso-soft text-parchment-light font-sans text-xs font-semibold border border-antiqueGold/60 shadow transition"
+                >
+                  <svg class="w-4 h-4 text-antiqueGold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>Buka Google Maps</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- STOP 3: Pos 3 - Sate Acong di Mayestik -->
+          <div class="relative mission-item" data-step="3">
+            <button
+              type="button"
+              onclick="toggleMissionStep(3)"
+              aria-label="Tandai Pos 3 Sate Acong selesai"
+              class="step-marker absolute -left-8 sm:-left-10 top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-espresso text-parchment-light border-2 border-antiqueGold-light flex items-center justify-center font-cinzel text-xs font-bold shadow cursor-pointer transition-transform active:scale-90"
+            >
+              3
+            </button>
+
+            <div class="ornate-card rounded-2xl p-4 sm:p-5 transition-all">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-espresso text-antiqueGold-light font-sans text-xs font-bold">
+                  🕒 19.00 WIB
+                </span>
+                <button
+                  type="button"
+                  onclick="toggleMissionStep(3)"
+                  class="step-check-btn inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-espresso/30 font-sans text-xs font-semibold text-espresso hover:bg-espresso/10 transition cursor-pointer"
+                >
+                  <span class="step-check-icon">○</span>
+                  <span class="step-check-label">Tandai Selesai</span>
+                </button>
+              </div>
+
+              <h4 class="font-playfair font-extrabold text-base sm:text-lg text-espresso">
+                Pos 3: Sate Acong di Mayestik
+              </h4>
+              <p class="font-lora text-sm text-espresso-soft mt-1 leading-relaxed">
+                <strong class="text-espresso">Misi:</strong> <span class="font-semibold text-espresso">Makan malam</span> spesial merayakan ulang tahun Raya
+              </p>
+
+              <div class="mt-3.5">
+                <a
+                  href="https://maps.google.com/?q=Sate+Acong+Mayestik+Jakarta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 rounded-xl bg-espresso hover:bg-espresso-soft text-parchment-light font-sans text-xs font-semibold border border-antiqueGold/60 shadow transition"
+                >
+                  <svg class="w-4 h-4 text-antiqueGold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>Buka Google Maps</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 5. CLOSING TREASURE CHEST CARD & INTERACTIVE CONFIRMATION         -->
+      <!-- ================================================================= -->
+      <footer class="relative z-10 px-5 pt-8 pb-12 sm:px-9 text-center">
+        <div class="ornate-card rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+          <!-- Illustrated Open Treasure Chest SVG -->
+          <div class="w-28 h-24 mx-auto mb-3 animate-float">
+            <svg viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-md">
+              <!-- Golden Glow Behind Chest -->
+              <ellipse cx="80" cy="65" rx="58" ry="34" fill="url(#goldGlow)" />
+              <!-- Open Chest Lid -->
+              <path d="M26 54C26 32 46 20 80 20C114 20 134 32 134 54L126 62H34L26 54Z" fill="#6b3e1e" stroke="#3b2314" stroke-width="3"/>
+              <path d="M36 54C36 38 52 28 80 28C108 28 124 38 124 54" stroke="#d4af37" stroke-width="3"/>
+              <!-- Pile of Gold Coins -->
+              <ellipse cx="80" cy="64" rx="44" ry="13" fill="#f3c63f" stroke="#8a6205" stroke-width="2"/>
+              <circle cx="56" cy="60" r="7" fill="#ffe074" stroke="#8a6205" stroke-width="1.5"/>
+              <circle cx="72" cy="57" r="8" fill="#ffd24c" stroke="#8a6205" stroke-width="1.5"/>
+              <circle cx="88" cy="58" r="8" fill="#ffe074" stroke="#8a6205" stroke-width="1.5"/>
+              <circle cx="104" cy="61" r="7" fill="#ffd24c" stroke="#8a6205" stroke-width="1.5"/>
+              <!-- Chest Base -->
+              <rect x="28" y="64" width="104" height="48" rx="6" fill="#7c4824" stroke="#3b2314" stroke-width="3"/>
+              <!-- Gold Straps -->
+              <rect x="40" y="64" width="8" height="48" fill="#d4af37" stroke="#3b2314" stroke-width="1.5"/>
+              <rect x="112" y="64" width="8" height="48" fill="#d4af37" stroke="#3b2314" stroke-width="1.5"/>
+              <rect x="28" y="64" width="104" height="7" fill="#d4af37" stroke="#3b2314" stroke-width="1.5"/>
+              <!-- Center Lock Buckle -->
+              <rect x="70" y="60" width="20" height="22" rx="4" fill="#f3d266" stroke="#3b2314" stroke-width="2"/>
+              <circle cx="80" cy="69" r="2.5" fill="#3b2314"/>
+              <path d="M80 71V76" stroke="#3b2314" stroke-width="2" stroke-linecap="round"/>
+              <!-- Sparkles -->
+              <path d="M80 6L82.5 13.5L90 16L82.5 18.5L80 26L77.5 18.5L70 16L77.5 13.5L80 6Z" fill="#ffd24c"/>
+              <path d="M132 24L133.5 28.5L138 30L133.5 31.5L132 36L130.5 31.5L126 30L130.5 28.5L132 24Z" fill="#ffe074"/>
+              <path d="M28 26L29.5 30.5L34 32L29.5 33.5L28 38L26.5 33.5L22 32L26.5 30.5L28 26Z" fill="#ffe074"/>
+              <defs>
+                <radialGradient id="goldGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80 65) rotate(90) scale(34 58)">
+                  <stop stop-color="#ffd24c" stop-opacity="0.75"/>
+                  <stop offset="1" stop-color="#ffd24c" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Tagline -->
+          <p class="font-script text-4xl sm:text-5xl text-espresso my-1">
+            Ayoo Kita Hunting Byy
+          </p>
+
+          <p class="font-lora text-xs sm:text-sm text-espresso-soft max-w-sm mx-auto mt-2 leading-relaxed">
+            Siapkan energi dan senyum terbaikmu untuk berburu hadiah seru sepanjang hari. Sampai ketemu di titik penjemputan ya!
+          </p>
+
+          <!-- Interactive Confirmation Button -->
+          <div class="mt-6 flex flex-col items-center gap-3">
+            <button
+              id="confirm-ready-btn"
+              type="button"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#b8860b] text-espresso font-sans font-extrabold text-sm tracking-wide border-2 border-espresso/40 shadow-lg hover:brightness-105 active:scale-[0.98] transition cursor-pointer"
+            >
+              <span id="confirm-btn-icon">✨</span>
+              <span id="confirm-btn-text">Siap Berangkat Hunting!</span>
+            </button>
+
+            <button
+              id="footer-copy-btn"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-espresso/10 hover:bg-espresso/20 text-espresso font-sans text-xs font-semibold transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>Salin Tautan Undangan</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="font-sans text-[11px] text-espresso-muted mt-6">
+          Dibuat khusus dengan ♥ untuk Ulang Tahun Raya • 15 November 2026
+        </p>
+      </footer>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- FULL-SCREEN TAP-TO-ZOOM LIGHTBOX MODAL                                -->
+  <!-- ===================================================================== -->
+  <div
+    id="lightbox-modal"
+    class="fixed inset-0 z-[80] bg-[#1a0f08]/95 backdrop-blur-md hidden flex-col justify-between select-none"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Penampil Gambar Layar Penuh"
+  >
+    <!-- Top Lightbox Toolbar -->
+    <div class="flex items-center justify-between px-4 py-3 sm:px-6 bg-espresso/80 border-b border-antiqueGold/30 text-parchment-light z-20">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span id="lightbox-badge" class="px-2.5 py-0.5 rounded-full bg-antiqueGold text-espresso font-sans text-[11px] font-extrabold shrink-0">
+          1 / 2
+        </span>
+        <h4 id="lightbox-title" class="font-playfair font-bold text-sm sm:text-base truncate">
+          Poster Undangan
+        </h4>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Toggle Zoom Button -->
+        <button
+          id="lightbox-zoom-btn"
+          type="button"
+          class="px-3 py-1.5 rounded-full bg-parchment-light/15 hover:bg-parchment-light/25 text-parchment-light font-sans text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
+        >
+          <svg class="w-4 h-4 text-antiqueGold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+          </svg>
+          <span id="lightbox-zoom-label">Zoom 2x</span>
+        </button>
+
+        <!-- Close Button -->
+        <button
+          id="lightbox-close-btn"
+          type="button"
+          aria-label="Tutup tampilan layar penuh"
+          class="w-9 h-9 rounded-full bg-crimsonX/90 hover:bg-crimsonX text-white flex items-center justify-center font-sans font-bold text-base shadow transition cursor-pointer"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Image Viewport (Supports Tap-to-Zoom & Drag-to-Pan) -->
+    <div
+      id="lightbox-viewport"
+      class="relative flex-1 w-full h-full overflow-hidden flex items-center justify-center p-3 sm:p-6 cursor-zoom-in touch-none"
+    >
+      <img
+        id="lightbox-img"
+        src=""
+        alt="Pratinjau Dokumen Harta Karun"
+        class="max-h-full max-w-full object-contain rounded-xl shadow-2xl border border-antiqueGold/40 transition-transform duration-200 ease-out origin-center"
+        draggable="false"
+      />
+    </div>
+
+    <!-- Bottom Switcher Bar -->
+    <div class="px-4 py-3 bg-espresso/85 border-t border-antiqueGold/30 flex items-center justify-center gap-3 z-20">
+      <button
+        type="button"
+        onclick="switchLightboxSlide(0)"
+        id="lb-pill-0"
+        class="px-4 py-2 rounded-full font-sans text-xs font-bold transition cursor-pointer bg-antiqueGold text-espresso"
+      >
+        I. Poster Undangan
+      </button>
+      <button
+        type="button"
+        onclick="switchLightboxSlide(1)"
+        id="lb-pill-1"
+        class="px-4 py-2 rounded-full font-sans text-xs font-bold transition cursor-pointer bg-parchment-light/15 text-parchment-light hover:bg-parchment-light/25"
+      >
+        II. Peta Misi Harta Karun
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE JAVASCRIPT LOGIC                                          -->
+  <!-- ===================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* -------------------------------------------------------------------
+       * 1. FIFE / GOOGLEUSERCONTENT IMAGE BLOB LOADER (Ensures uploaded images
+       *    display cleanly in both sandboxed iframes and standalone browsers)
+       * ------------------------------------------------------------------- */
+      async function fetchFifeImageBlobUsingAlr(urlString) {
+        if (!urlString || urlString.startsWith('blob:') || urlString.startsWith('data:')) {
+          throw new Error('Already local');
+        }
+        var url = new URL(urlString, window.location.href);
+        url.searchParams.set('alr', 'yes');
+        for (var i = 0; i < 5; i++) {
+          var response = await fetch(url.toString(), { credentials: 'include' });
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          var contentType = response.headers.get('content-type');
+          if (!contentType || !contentType.startsWith('text/plain')) {
+            var blob = await response.blob();
+            if (blob.size > 0 && blob.type.startsWith('image/')) {
+              return blob;
+            }
+            throw new Error('Invalid image blob');
+          }
+          url = new URL(await response.text());
+        }
+        throw new Error('Max redirects');
+      }
+
+      async function hydrateUploadedImages() {
+        var imgs = [
+          document.getElementById('img-poster'),
+          document.getElementById('img-map')
+        ].filter(Boolean);
+
+        await Promise.all(
+          imgs.map(async function (img) {
+            if (img.src && img.src.includes('googleusercontent')) {
+              try {
+                var blob = await fetchFifeImageBlobUsingAlr(img.src);
+                img.src = URL.createObjectURL(blob);
+              } catch (e) {
+                // Keep original src or onerror fallback if ALR is not needed/blocked
+              }
+            }
+          })
+        );
+      }
+
+      /* -------------------------------------------------------------------
+       * 2. TOAST HELPER (Replaces alert() cleanly)
+       * ------------------------------------------------------------------- */
+      var toastTimer = null;
+      function showToast(message) {
+        var banner = document.getElementById('toast-banner');
+        var msgEl = document.getElementById('toast-message');
+        if (!banner || !msgEl) return;
+
+        msgEl.textContent = message;
+        banner.classList.remove('opacity-0', '-translate-y-6', 'pointer-events-none');
+        banner.classList.add('opacity-100', 'translate-y-0');
+
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          banner.classList.add('opacity-0', '-translate-y-6', 'pointer-events-none');
+          banner.classList.remove('opacity-100', 'translate-y-0');
+        }, 3200);
+      }
+
+      /* -------------------------------------------------------------------
+       * 3. GENTLE SYNTHESIZED MUSIC BOX MELODY (WEB AUDIO API)
+       *    No external audio URLs; gentle birthday/adventure waltz loop
+       * ------------------------------------------------------------------- */
+      var audioCtx = null;
+      var isMusicPlaying = false;
+      var melodyTimer = null;
+      var noteIndex = 0;
+
+      // Gentle music-box notes (Happy Birthday + warm adventure cadence in F Major)
+      var MELODY_NOTES = [
+        { freq: 261.63, dur: 0.35 }, // C4
+        { freq: 261.63, dur: 0.25 }, // C4
+        { freq: 293.66, dur: 0.6 },  // D4
+        { freq: 261.63, dur: 0.6 },  // C4
+        { freq: 349.23, dur: 0.6 },  // F4
+        { freq: 329.63, dur: 1.0 },  // E4
+        { freq: 0,      dur: 0.25 },
+        { freq: 261.63, dur: 0.35 }, // C4
+        { freq: 261.63, dur: 0.25 }, // C4
+        { freq: 293.66, dur: 0.6 },  // D4
+        { freq: 261.63, dur: 0.6 },  // C4
+        { freq: 392.00, dur: 0.6 },  // G4
+        { freq: 349.23, dur: 1.0 },  // F4
+        { freq: 0,      dur: 0.25 },
+        { freq: 261.63, dur: 0.35 }, // C4
+        { freq: 261.63, dur: 0.25 }, // C4
+        { freq: 523.25, dur: 0.6 },  // C5
+        { freq: 440.00, dur: 0.6 },  // A4
+        { freq: 349.23, dur: 0.6 },  // F4
+        { freq: 329.63, dur: 0.6 },  // E4
+        { freq: 293.66, dur: 1.0 },  // D4
+        { freq: 0,      dur: 0.25 },
+        { freq: 466.16, dur: 0.35 }, // Bb4
+        { freq: 466.16, dur: 0.25 }, // Bb4
+        { freq: 440.00, dur: 0.6 },  // A4
+        { freq: 349.23, dur: 0.6 },  // F4
+        { freq: 392.00, dur: 0.6 },  // G4
+        { freq: 349.23, dur: 1.1 },  // F4
+        { freq: 0,      dur: 0.6 }
+      ];
+
+      function playMusicBoxTone(freq, duration) {
+        if (!audioCtx || freq <= 0) return;
+        try {
+          var now = audioCtx.currentTime;
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.045, now + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.35);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc.stop(now + duration + 0.4);
+        } catch (e) {}
+      }
+
+      function scheduleNextNote() {
+        if (!isMusicPlaying) return;
+        var current = MELODY_NOTES[noteIndex % MELODY_NOTES.length];
+        playMusicBoxTone(current.freq, current.dur);
+        noteIndex++;
+        melodyTimer = setTimeout(scheduleNextNote, current.dur * 1000);
+      }
+
+      function updateMusicButtonUI() {
+        var iconOn = document.getElementById('icon-sound-on');
+        var iconOff = document.getElementById('icon-sound-off');
+        if (!iconOn || !iconOff) return;
+        if (isMusicPlaying) {
+          iconOn.classList.remove('hidden');
+          iconOff.classList.add('hidden');
+        } else {
+          iconOn.classList.add('hidden');
+          iconOff.classList.remove('hidden');
+        }
+      }
+
+      function startBackgroundMusic() {
+        try {
+          var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          if (!audioCtx) {
+            audioCtx = new AudioContextClass();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (!isMusicPlaying) {
+            isMusicPlaying = true;
+            updateMusicButtonUI();
+            scheduleNextNote();
+          }
+        } catch (e) {}
+      }
+
+      function toggleBackgroundMusic() {
+        if (isMusicPlaying) {
+          isMusicPlaying = false;
+          clearTimeout(melodyTimer);
+          updateMusicButtonUI();
+          showToast('Musik latar dijeda');
+        } else {
+          startBackgroundMusic();
+          showToast('Musik kotak musik diputar ♪');
+        }
+      }
+
+      function playCelebrationChime() {
+        try {
+          var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          if (!audioCtx) audioCtx = new AudioContextClass();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          var notes = [523.25, 659.25, 783.99, 1046.5];
+          notes.forEach(function (f, idx) {
+            setTimeout(function () {
+              playMusicBoxTone(f, 0.35);
+            }, idx * 90);
+          });
+        } catch (e) {}
+      }
+
+      /* -------------------------------------------------------------------
+       * 4. COVER GATE UNLOCK LOGIC
+       * ------------------------------------------------------------------- */
+      function initCoverGate() {
+        var coverGate = document.getElementById('cover-gate');
+        var openBtn = document.getElementById('open-invitation-btn');
+        var floatingControls = document.getElementById('floating-controls');
+
+        document.body.style.overflow = 'hidden';
+
+        openBtn.addEventListener('click', function () {
+          coverGate.classList.add('opened');
+          document.body.style.overflow = '';
+          floatingControls.classList.remove('opacity-0', 'pointer-events-none');
+          startBackgroundMusic();
+          triggerConfettiBurst(55);
+        });
+      }
+
+      /* -------------------------------------------------------------------
+       * 5. LIVE COUNTDOWN TIMER (Target: Minggu, 15 November 2026 15:00 WIB)
+       * ------------------------------------------------------------------- */
+      function initCountdown() {
+        var targetTime = new Date('2026-11-15T15:00:00+07:00').getTime();
+        var daysEl = document.getElementById('cd-days');
+        var hoursEl = document.getElementById('cd-hours');
+        var minsEl = document.getElementById('cd-minutes');
+        var secsEl = document.getElementById('cd-seconds');
+        var startedBanner = document.getElementById('countdown-started-banner');
+
+        function pad(num) {
+          return String(num).padStart(2, '0');
+        }
+
+        function updateTimer() {
+          var now = Date.now();
+          var diff = targetTime - now;
+
+          if (diff <= 0) {
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minsEl.textContent = '00';
+            secsEl.textContent = '00';
+            if (startedBanner) startedBanner.classList.remove('hidden');
+            return;
+          }
+
+          var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          var minutes = Math.floor((diff / (1000 * 60)) % 60);
+          var seconds = Math.floor((diff / 1000) % 60);
+
+          daysEl.textContent = pad(days);
+          hoursEl.textContent = pad(hours);
+          minsEl.textContent = pad(minutes);
+          secsEl.textContent = pad(seconds);
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+      }
+
+      /* -------------------------------------------------------------------
+       * 6. DOCUMENT FILTER TABS & TAP-TO-ZOOM LIGHTBOX MODAL
+       * ------------------------------------------------------------------- */
+      function initDocumentTabs() {
+        var tabs = document.querySelectorAll('.doc-tab');
+        var posterCard = document.getElementById('card-poster');
+        var mapCard = document.getElementById('card-map');
+
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var target = tab.getAttribute('data-tab');
+
+            tabs.forEach(function (t) {
+              t.classList.remove('bg-espresso', 'text-parchment-light', 'shadow');
+              t.classList.add('bg-espresso/10', 'text-espresso');
+            });
+            tab.classList.add('bg-espresso', 'text-parchment-light', 'shadow');
+            tab.classList.remove('bg-espresso/10', 'text-espresso');
+
+            if (target === 'all') {
+              posterCard.classList.remove('hidden');
+              mapCard.classList.remove('hidden');
+            } else if (target === 'poster') {
+              posterCard.classList.remove('hidden');
+              mapCard.classList.add('hidden');
+            } else if (target === 'map') {
+              posterCard.classList.add('hidden');
+              mapCard.classList.remove('hidden');
+            }
+          });
+        });
+      }
+
+      // Lightbox State
+      var currentSlide = 0;
+      var isZoomed = false;
+      var panX = 0;
+      var panY = 0;
+      var isDragging = false;
+      var dragMoved = false;
+      var startX = 0;
+      var startY = 0;
+
+      function applyLightboxTransform() {
+        var lbImg = document.getElementById('lightbox-img');
+        var zoomLabel = document.getElementById('lightbox-zoom-label');
+        var viewport = document.getElementById('lightbox-viewport');
+        if (!lbImg) return;
+
+        if (isZoomed) {
+          lbImg.style.transform = 'translate(' + panX + 'px, ' + panY + 'px) scale(2.1)';
+          zoomLabel.textContent = 'Reset 1x';
+          viewport.classList.remove('cursor-zoom-in');
+          viewport.classList.add('cursor-grab');
+        } else {
+          panX = 0;
+          panY = 0;
+          lbImg.style.transform = 'translate(0px, 0px) scale(1)';
+          zoomLabel.textContent = 'Zoom 2x';
+          viewport.classList.add('cursor-zoom-in');
+          viewport.classList.remove('cursor-grab');
+        }
+      }
+
+      window.switchLightboxSlide = function (index) {
+        currentSlide = index;
+        isZoomed = false;
+        panX = 0;
+        panY = 0;
+
+        var lbImg = document.getElementById('lightbox-img');
+        var lbTitle = document.getElementById('lightbox-title');
+        var lbBadge = document.getElementById('lightbox-badge');
+        var pill0 = document.getElementById('lb-pill-0');
+        var pill1 = document.getElementById('lb-pill-1');
+
+        var sourceImg = index === 0 ? document.getElementById('img-poster') : document.getElementById('img-map');
+        lbImg.src = sourceImg ? sourceImg.src : '';
+        lbTitle.textContent = index === 0 ? 'Poster Undangan Ulang Tahun Raya' : 'Peta Misi Harta Karun';
+        lbBadge.textContent = index === 0 ? '1 / 2' : '2 / 2';
+
+        if (index === 0) {
+          pill0.className = 'px-4 py-2 rounded-full font-sans text-xs font-bold transition cursor-pointer bg-antiqueGold text-espresso';
+          pill1.className = 'px-4 py-2 rounded-full font-sans text-xs font-bold transition cursor-pointer bg-parchment-light/15 text-parchment-light hover:bg-parchment-light/25';
+        } else {
+          pill1.className = 'px-4 py-2 rounded-full font-sans text-xs font-bold transition cursor-pointer bg-antiqueGold text-espresso';
+          pill0.className = 'px-4 py-2 rounded-full font-sans text-xs font-bold transition cursor-pointer bg-parchment-light/15 text-parchment-light hover:bg-parchment-light/25';
+        }
+
+        applyLightboxTransform();
+      };
+
+      window.openLightbox = function (index) {
+        var modal = document.getElementById('lightbox-modal');
+        if (!modal) return;
+        window.switchLightboxSlide(index);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      };
+
+      function closeLightbox() {
+        var modal = document.getElementById('lightbox-modal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        isZoomed = false;
+        document.body.style.overflow = '';
+      }
+
+      function initLightbox() {
+        var closeBtn = document.getElementById('lightbox-close-btn');
+        var zoomBtn = document.getElementById('lightbox-zoom-btn');
+        var viewport = document.getElementById('lightbox-viewport');
+        var lbImg = document.getElementById('lightbox-img');
+
+        closeBtn.addEventListener('click', closeLightbox);
+
+        zoomBtn.addEventListener('click', function () {
+          isZoomed = !isZoomed;
+          applyLightboxTransform();
+        });
+
+        // Mouse & Touch Drag Panning when Zoomed + Tap to Toggle Zoom
+        function onPointerDown(clientX, clientY) {
+          isDragging = true;
+          dragMoved = false;
+          startX = clientX - panX;
+          startY = clientY - panY;
+          lbImg.style.transition = 'none';
+        }
+
+        function onPointerMove(clientX, clientY) {
+          if (!isDragging || !isZoomed) return;
+          var dx = clientX - startX;
+          var dy = clientY - startY;
+          if (Math.abs(dx - panX) > 4 || Math.abs(dy - panY) > 4) {
+            dragMoved = true;
+          }
+          panX = dx;
+          panY = dy;
+          lbImg.style.transform = 'translate(' + panX + 'px, ' + panY + 'px) scale(2.1)';
+        }
+
+        function onPointerUp(targetEl) {
+          lbImg.style.transition = 'transform 200ms ease-out';
+          if (isDragging && !dragMoved) {
+            if (targetEl === viewport) {
+              closeLightbox();
+            } else {
+              isZoomed = !isZoomed;
+              applyLightboxTransform();
+            }
+          }
+          isDragging = false;
+        }
+
+        viewport.addEventListener('mousedown', function (e) {
+          e.preventDefault();
+          onPointerDown(e.clientX, e.clientY);
+        });
+        window.addEventListener('mousemove', function (e) {
+          onPointerMove(e.clientX, e.clientY);
+        });
+        window.addEventListener('mouseup', function (e) {
+          if (isDragging) onPointerUp(e.target);
+        });
+
+        viewport.addEventListener('touchstart', function (e) {
+          if (e.touches.length === 1) {
+            onPointerDown(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }, { passive: true });
+
+        viewport.addEventListener('touchmove', function (e) {
+          if (e.touches.length === 1 && isZoomed) {
+            onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', function (e) {
+          if (isDragging) onPointerUp(e.target);
+        });
+
+        document.addEventListener('keydown', function (e) {
+          var modal = document.getElementById('lightbox-modal');
+          if (modal.classList.contains('hidden')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') window.switchLightboxSlide(1);
+          if (e.key === 'ArrowLeft') window.switchLightboxSlide(0);
+        });
+      }
+
+      /* -------------------------------------------------------------------
+       * 7. CHECKABLE MISSION PROGRESS (PERSISTED IN LOCALSTORAGE)
+       * ------------------------------------------------------------------- */
+      var STORAGE_KEY_STEPS = 'raya_treasure_steps_2026';
+      var STORAGE_KEY_READY = 'raya_treasure_ready_2026';
+      var completedSteps = [false, false, false, false];
+
+      function loadMissionProgress() {
+        try {
+          var saved = localStorage.getItem(STORAGE_KEY_STEPS);
+          if (saved) {
+            var parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length === 4) {
+              completedSteps = parsed;
+            }
+          }
+        } catch (e) {}
+        renderMissionProgress();
+      }
+
+      function saveMissionProgress() {
+        try {
+          localStorage.setItem(STORAGE_KEY_STEPS, JSON.stringify(completedSteps));
+        } catch (e) {}
+      }
+
+      function renderMissionProgress() {
+        var items = document.querySelectorAll('.mission-item');
+        var doneCount = 0;
+
+        items.forEach(function (item) {
+          var idx = parseInt(item.getAttribute('data-step'), 10);
+          var isDone = !!completedSteps[idx];
+          if (isDone) doneCount++;
+
+          var marker = item.querySelector('.step-marker');
+          var btn = item.querySelector('.step-check-btn');
+          var icon = item.querySelector('.step-check-icon');
+          var label = item.querySelector('.step-check-label');
+          var card = item.querySelector('.ornate-card');
+
+          if (isDone) {
+            marker.classList.remove('bg-espresso', 'text-parchment-light');
+            marker.classList.add('bg-crimsonX', 'text-white');
+            marker.textContent = '✕';
+
+            btn.classList.add('bg-espresso', 'text-parchment-light', 'border-espresso');
+            btn.classList.remove('text-espresso', 'hover:bg-espresso/10');
+            icon.textContent = '✓';
+            label.textContent = 'Selesai';
+            card.classList.add('ring-2', 'ring-antiqueGold/60');
+          } else {
+            marker.classList.add('bg-espresso', 'text-parchment-light');
+            marker.classList.remove('bg-crimsonX', 'text-white');
+            marker.textContent = idx === 0 ? '⚑' : String(idx);
+
+            btn.classList.remove('bg-espresso', 'text-parchment-light', 'border-espresso');
+            btn.classList.add('text-espresso', 'hover:bg-espresso/10');
+            icon.textContent = '○';
+            label.textContent = 'Tandai Selesai';
+            card.classList.remove('ring-2', 'ring-antiqueGold/60');
+          }
+        });
+
+        var progressText = document.getElementById('mission-progress-text');
+        var progressBar = document.getElementById('mission-progress-bar');
+        if (progressText) progressText.textContent = doneCount + ' / 4 Pos Selesai';
+        if (progressBar) progressBar.style.width = (doneCount / 4) * 100 + '%';
+      }
+
+      window.toggleMissionStep = function (index) {
+        completedSteps[index] = !completedSteps[index];
+        saveMissionProgress();
+        renderMissionProgress();
+
+        if (completedSteps[index]) {
+          var allDone = completedSteps.every(Boolean);
+          if (allDone) {
+            triggerConfettiBurst(110);
+            playCelebrationChime();
+            showToast('Selamat! Semua pos harta karun berhasil ditaklukkan! 🏆');
+          } else {
+            triggerConfettiBurst(30);
+            showToast('Pos berhasil ditandai selesai! ✦');
+          }
+        }
+      };
+
+      /* -------------------------------------------------------------------
+       * 8. CELEBRATION CONFETTI & GOLD SPARKLES CANVAS
+       * ------------------------------------------------------------------- */
+      var particles = [];
+      var animFrameId = null;
+
+      function triggerConfettiBurst(count) {
+        var canvas = document.getElementById('celebration-canvas');
+        if (!canvas) return;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var colors = ['#d4af37', '#f3d266', '#b8860b', '#a8201a', '#fff4d2', '#3b2314'];
+        for (var i = 0; i < count; i++) {
+          particles.push({
+            x: canvas.width * (0.2 + Math.random() * 0.6),
+            y: canvas.height * 0.45,
+            vx: (Math.random() - 0.5) * 12,
+            vy: -Math.random() * 11 - 3,
+            size: Math.random() * 7 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            vRot: (Math.random() - 0.5) * 12,
+            alpha: 1,
+            shape: Math.random() > 0.4 ? 'rect' : 'star'
+          });
+        }
+
+        if (!animFrameId) {
+          animateParticles();
+        }
+      }
+
+      function animateParticles() {
+        var canvas = document.getElementById('celebration-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = particles.length - 1; i >= 0; i--) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.28; // gravity
+          p.vx *= 0.99;
+          p.rotation += p.vRot;
+          p.alpha -= 0.012;
+
+          if (p.alpha <= 0 || p.y > canvas.height + 20) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === 'rect') {
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size * 0.45, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        if (particles.length > 0) {
+          animFrameId = requestAnimationFrame(animateParticles);
+        } else {
+          animFrameId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      /* -------------------------------------------------------------------
+       * 9. CONFIRMATION CTA & CLIPBOARD COPY (document.execCommand('copy'))
+       * ------------------------------------------------------------------- */
+      function copyInvitationLink() {
+        var urlToCopy = window.location.href;
+        var tempInput = document.createElement('textarea');
+        tempInput.value = urlToCopy;
+        tempInput.setAttribute('readonly', '');
+        tempInput.style.position = 'fixed';
+        tempInput.style.left = '-9999px';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+          document.execCommand('copy');
+          showToast('Tautan undangan berhasil disalin! Siap dibagikan ke Raya ♥');
+        } catch (err) {
+          showToast('Tautan siap dibagikan dari bilah alamat browser');
+        }
+        document.body.removeChild(tempInput);
+      }
+
+      function initConfirmationAndActions() {
+        var confirmBtn = document.getElementById('confirm-ready-btn');
+        var btnText = document.getElementById('confirm-btn-text');
+        var btnIcon = document.getElementById('confirm-btn-icon');
+        var musicBtn = document.getElementById('music-toggle-btn');
+        var shareBtn = document.getElementById('share-link-btn');
+        var footerCopyBtn = document.getElementById('footer-copy-btn');
+
+        try {
+          if (localStorage.getItem(STORAGE_KEY_READY) === 'true') {
+            btnIcon.textContent = '🎉';
+            btnText.textContent = 'Yeay! Raya Siap Berangkat!';
+          }
+        } catch (e) {}
+
+        confirmBtn.addEventListener('click', function () {
+          try {
+            localStorage.setItem(STORAGE_KEY_READY, 'true');
+          } catch (e) {}
+          btnIcon.textContent = '🎉';
+          btnText.textContent = 'Yeay! Raya Siap Berangkat!';
+          triggerConfettiBurst(130);
+          playCelebrationChime();
+          showToast('Konfirmasi diterima! Sampai ketemu jam 15.00 WIB ya Byy ♥');
+        });
+
+        musicBtn.addEventListener('click', toggleBackgroundMusic);
+        shareBtn.addEventListener('click', copyInvitationLink);
+        footerCopyBtn.addEventListener('click', copyInvitationLink);
+
+        window.addEventListener('resize', function () {
+          var canvas = document.getElementById('celebration-canvas');
+          if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          }
+        });
+      }
+
+      /* -------------------------------------------------------------------
+       * BOOTSTRAP APPLICATION
+       * ------------------------------------------------------------------- */
+      document.addEventListener('DOMContentLoaded', function () {
+        hydrateUploadedImages();
+        initCoverGate();
+        initCountdown();
+        initDocumentTabs();
+        initLightbox();
+        loadMissionProgress();
+        initConfirmationAndActions();
+      });
+    })();
+  </script>
+</body>
+</html>
